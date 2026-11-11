@@ -20,7 +20,7 @@ export async function createApp({
   config: Config;
 }) {
   const app = Fastify({
-    logger: config.production ? { level: "info" } : false,
+    logger: { level: config.production ? "info" : "error" },
     disableRequestLogging: true,
     trustProxy: ["127.0.0.1", "::1"],
     bodyLimit: 65536,
@@ -64,12 +64,16 @@ export async function createApp({
   });
   await app.register(rateLimit, {
     global: true,
+    hook: "preHandler",
     max: 300,
     timeWindow: "1 minute",
-    errorResponseBuilder: (request) => ({
-      error: { code: "RATE_LIMITED", message: "请求过于频繁，请稍后重试" },
-      meta: meta(request),
-    }),
+    allowList: (request) => !request.url.startsWith("/api/"),
+    keyGenerator: (request) =>
+      request.user
+        ? `user:${request.user.tenant_id}:${request.user.id}`
+        : `ip:${request.ip}`,
+    errorResponseBuilder: () =>
+      new ApiError(429, "RATE_LIMITED", "请求过于频繁，请稍后重试"),
   });
   app.setErrorHandler(
     (error: Error & { code?: string; statusCode?: number }, request, reply) => {

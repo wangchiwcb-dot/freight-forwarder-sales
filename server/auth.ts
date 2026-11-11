@@ -91,7 +91,7 @@ export async function registerAuth(
   const failedAccounts = new Map<string, { count: number; until: number }>();
   app.decorateRequest("user", null);
   app.decorateRequest("sessionToken", null);
-  app.addHook("preHandler", async (request, reply) => {
+  app.addHook("onRequest", async (request, reply) => {
     const path = new URL(request.url, "http://local").pathname;
     if (!path.startsWith("/api/")) return;
     reply.header("Cache-Control", "no-store");

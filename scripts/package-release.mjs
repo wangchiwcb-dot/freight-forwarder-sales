@@ -36,7 +36,13 @@ try {
       2,
     ) + "\n",
   );
-  execFileSync("tar", ["-czf", output, "-C", stage, "."]);
+  execFileSync(
+    "tar",
+    ["--no-xattrs", "--no-acls", "-czf", output, "-C", stage, "."],
+    {
+      env: { ...process.env, COPYFILE_DISABLE: "1" },
+    },
+  );
   const digest = createHash("sha256")
     .update(await readFile(output))
     .digest("hex");

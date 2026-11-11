@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily sales workbench backup
+
+[Timer]
+OnCalendar=*-*-* 03:15:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=300
+Unit=sales-workbench-backup.service
+
+[Install]
+WantedBy=timers.target

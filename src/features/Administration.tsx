@@ -777,6 +777,7 @@ const fields: Record<string, string> = {
 };
 const actionNames: Record<string, string> = {
   create: "新增",
+  provision_team: "批量开通团队账号",
   update: "修改",
   archive: "归档",
   restore: "恢复",

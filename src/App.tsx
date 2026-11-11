@@ -13,7 +13,6 @@ import {
   ApartmentOutlined,
   AppstoreOutlined,
   AuditOutlined,
-  BoxPlotOutlined,
   ContactsOutlined,
   LeftOutlined,
   LogoutOutlined,
@@ -131,8 +130,15 @@ export function Application() {
 function Brand() {
   return (
     <div className="brand">
-      <div className="brand-icon">
-        <BoxPlotOutlined />
+      <div className="brand-logo-frame">
+        <img
+          className="brand-logo"
+          src="/brand/zhhq-logo.png"
+          alt="中航环球 Zhonghang Global International"
+          width={479}
+          height={546}
+          decoding="async"
+        />
       </div>
       <div className="brand-text">
         <strong>中航环球</strong>
@@ -586,6 +592,9 @@ function WorkbenchLayout() {
                   .filter((a) => !scope.teamId || a.teamId === scope.teamId)
                   .map((a) => ({ value: a.id, label: a.displayName }))}
               />
+            ) : null}
+            {user.teamName ? (
+              <span className="scope-team">所属团队：{user.teamName}</span>
             ) : null}
             <span className="scope-note">
               {scope.scope === "mine"

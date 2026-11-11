@@ -16,7 +16,9 @@
     "../shared/**/*.ts",
     "../scripts/migrate.ts",
     "../scripts/bootstrap.ts",
-    "../scripts/maintenance.ts"
+    "../scripts/maintenance.ts",
+    "../scripts/provision-team.ts",
+    "../scripts/verify-live.ts"
   ],
   "exclude": ["./**/*.test.ts"]
 }

@@ -1,0 +1,14 @@
+[Unit]
+Description=Backup sales workbench database
+After=docker.service
+
+[Service]
+Type=oneshot
+User=root
+Environment=PG_CONTAINER=freight-postgres
+Environment=PG_DATABASE=sales_workbench
+Environment=BACKUP_DIR=/opt/sales-workbench/backups
+ExecStart=/bin/bash /opt/sales-workbench/current/deploy/backup-container.sh
+UMask=0077
+PrivateTmp=true
+NoNewPrivileges=true
