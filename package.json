@@ -1,0 +1,59 @@
+{
+  "name": "freight-forwarder-sales",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 4193",
+    "dev:api": "tsx watch --env-file-if-exists=.env server/index.ts",
+    "typecheck": "tsc --noEmit && tsc -p server/tsconfig.json --noEmit",
+    "build": "npm run typecheck && vite build && tsc -p server/tsconfig.json",
+    "start": "node --env-file-if-exists=.env dist/api/server/index.js",
+    "db:migrate": "tsx --env-file-if-exists=.env scripts/migrate.ts",
+    "db:bootstrap": "tsx --env-file-if-exists=.env scripts/bootstrap.ts",
+    "demo:setup": "tsx scripts/demo-setup.ts",
+    "test": "vitest run",
+    "test:postgres": "tsx scripts/test-postgres.ts",
+    "test:e2e": "playwright test",
+    "package": "npm run build && node scripts/package-release.mjs",
+    "format": "prettier --write src server shared scripts tests *.ts *.json *.md docs .github/workflows/*.yml",
+    "format:check": "prettier --check src server shared scripts tests *.ts *.json *.md docs .github/workflows/*.yml"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.1.0",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "@electric-sql/pglite": "^0.5.16",
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/helmet": "^13.0.2",
+    "@fastify/rate-limit": "^11.0.0",
+    "@fastify/static": "^10.0.0",
+    "@tanstack/react-query": "^5.90.0",
+    "antd": "^5.29.0",
+    "dayjs": "^1.11.13",
+    "fastify": "^5.6.0",
+    "pg": "^8.16.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-router-dom": "^7.9.0",
+    "recharts": "^3.3.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.10.0",
+    "@types/pg": "^8.15.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "embedded-postgres": "^18.6.0-beta.19",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.2",
+    "vitest": "^5.1.0"
+  }
+}

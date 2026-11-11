@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "../dist/api",
+    "rootDir": "..",
+    "types": ["node"],
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./**/*.ts",
+    "../shared/**/*.ts",
+    "../scripts/migrate.ts",
+    "../scripts/bootstrap.ts",
+    "../scripts/maintenance.ts"
+  ],
+  "exclude": ["./**/*.test.ts"]
+}

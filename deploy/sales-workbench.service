@@ -1,0 +1,24 @@
+[Unit]
+Description=Freight Sales Workbench
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sales-workbench
+Group=sales-workbench
+WorkingDirectory=/opt/sales-workbench/current
+EnvironmentFile=/etc/sales-workbench/api.env
+ExecStart=/opt/sales-workbench/runtime/node/bin/node dist/api/server/index.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+UMask=0077
+MemoryMax=768M
+
+[Install]
+WantedBy=multi-user.target
